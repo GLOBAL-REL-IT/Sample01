@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
--->
 <html lang="en" >
     <head>
         <meta charset="UTF-8">
@@ -10,15 +6,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
         <link rel="stylesheet" href="assets/css/login.css">
 
         <style>
-
-            /* Style the body */
             body {
                 font-family: Arial;
                 margin: 0;
                 height: 80%;
             }
 
-            /* Header/Logo Title */
             .header {
                 padding: 60px;
                 text-align: center;
@@ -32,9 +25,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                /*min-height: calc(60vh + 170px);*/
-                /*min-height: 80vh;*/
-                /*margin-top: 120px;*/
                 padding-top: 90px;
             }
 
@@ -46,7 +36,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                 box-shadow: 0px 0px 24px #5C5696;
             }
 
-            /* Page Content */
             .content {
                 padding:20px;
             }
@@ -54,16 +43,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     </head>
 
     <body>
-
-        <!-- partial:index.partial.html -->
-        <!--<form action="#" method="post">-->
         <div class="container">
             <div class="header">
                 <h1>OSTORMS</h1>
                 <p>OSPI STORAGE SYSTEM</p>
                 <br>
                 <img src="assets/img/inventory-mgt.png" alt="store Icon" style="width:300px; height:300px;">
-                <!--<link rel='stylesheet' href='./resources/css/all.css'>-->
             </div>
             <div class="screen">
                 <div class="screen__content">
@@ -76,10 +61,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                             <i class="login__icon fas fa-lock"></i>
                             <input type="password" class="login__input" placeholder="Password">
                         </div>
-                        <button class="button login__submit" onclick="location.href = 'index.html'" id="submitButton">
+                        <button class="button login__submit" onClick="window.location.href='start.html'" type="button">
                             <span class="button__text">Log In Now</span>
                             <i class="button__icon fas fa-chevron-right"></i>
-                        </button>				
+                        </button>
                     </form>
                 </div>
 
@@ -91,7 +76,5 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                 </div>		
             </div>
         </div>
-        <!--</form>-->
-        <!-- partial -->
     </body>
 </html>
