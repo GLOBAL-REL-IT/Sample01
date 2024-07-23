@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            How to select all checkboxes in all
+            pages in Jquery DataTable?
+        </title>
+
+        <!-- Data table CSS CDN Link -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/jquery.dataTables.min.css" integrity="sha512-1k7mWiTNoyx2XtmI96o+hdjP8nn0f3Z2N4oF/9ZZRgijyV4omsKOXEnqL1gKQNPy2MTSP9rIEWGcH/CInulptA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <style>
+            .conatiner {
+                text-align: center;
+            }
+
+            .tableData {
+                margin: auto;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="conatiner">
+            <h1 style="color: green;">
+                GeeksforGeeks
+            </h1>
+            <h3>
+                Select all the checkboxes of the table by
+                clicking the Select All button
+            </h3>
+            <table id="myTable" border="1px solid #ccc;"
+                   class="tableData">
+                <thead>
+                    <tr>
+                        <th>
+                            <button id="selectAll" class="GFGSelect">
+                                Select All
+                            </button>
+                        </th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Designation</th>
+                        <th>City</th>
+                        <th>Country</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="checbox1">
+                        </td>
+                        <td>Garvit Malhotra</td>
+                        <td>25</td>
+                        <td>Web Developer</td>
+                        <td>Pune</td>
+                        <td>India</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="checbox2">
+                        </td>
+                        <td>Kunal Srivats</td>
+                        <td>22</td>
+                        <td>Software Engineer</td>
+                        <td>Kolkata</td>
+                        <td>India</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox"
+                                   id="checbox3">
+                        </td>
+                        <td>Jordan Sandhu</td>
+                        <td>32</td>
+                        <td>Video Editor</td>
+                        <td>Durban</td>
+                        <td>South Africa</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="checbox4">
+                        </td>
+                        <td>Sreenath Malinga</td>
+                        <td>29</td>
+                        <td>Head Coach</td>
+                        <td>Colombo</td>
+                        <td>Sri Lanka</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="checbox5">
+                        </td>
+                        <td>Benjamin Smith</td>
+                        <td>26</td>
+                        <td>Blog/Content Writer</td>
+                        <td>Melbourne</td>
+                        <td>Australia</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- jQuery CDN Link -->
+        <script src=
+                "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+                integrity=
+                "sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+                crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+
+        <!-- DataTable Script CDN Link -->
+        <script src=
+                "https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+                integrity=
+                "sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
+                crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+
+        <!-- Custom Script -->
+        <script>
+            $(document).ready(() => {
+                const myTable = $('#myTable').dataTable({
+                    stateSave: true
+                });
+                const allPagesCheckboxes = myTable.api().cells().nodes();
+
+                $('#selectAll').click(function () {
+                    if ($(this).text() === "Unselect All") {
+                        $(allPagesCheckboxes).find('input[type="checkbox"]')
+                                .attr('checked', false);
+                        $(this).text('Select All');
+                    } else {
+                        $(allPagesCheckboxes).find('input[type="checkbox"]')
+                                .attr('checked', true);
+                        $(this).text('Unselect All');
+                    }
+
+                });
+            });
+        </script>
+    </body>
+
+</html>

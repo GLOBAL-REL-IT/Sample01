@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
+-->
+<html>
+    <head>
+        <link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+        <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
+        <link href="https://cdn.datatables.net/2.0.4/css/dataTables.dataTables.css" rel="stylesheet" type="text/css" />
+        <script src="https://cdn.datatables.net/2.0.4/js/dataTables.js"></script>
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+        <link href="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.0.2/af-2.7.0/b-3.0.1/b-colvis-3.0.1/b-html5-3.0.1/b-print-3.0.1/cr-2.0.0/date-1.5.2/fc-5.0.0/fh-4.0.1/kt-2.12.0/r-3.0.0/rg-1.5.0/rr-1.5.0/sc-2.4.1/sb-1.7.0/sp-2.3.0/sl-2.0.0/sr-1.4.0/datatables.min.css" rel="stylesheet">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.0.2/af-2.7.0/b-3.0.1/b-colvis-3.0.1/b-html5-3.0.1/b-print-3.0.1/cr-2.0.0/date-1.5.2/fc-5.0.0/fh-4.0.1/kt-2.12.0/r-3.0.0/rg-1.5.0/rr-1.5.0/sc-2.4.1/sb-1.7.0/sp-2.3.0/sl-2.0.0/sr-1.4.0/datatables.min.js"></script>    
+
+        <script>
+            $(document).ready(function () {
+                var table = $('#example').DataTable({
+                    dom: 't',
+                    select: {
+                        selector: 'td, input.noselect:not(:has(:checkbox))'
+                    }
+                });
+
+                table.on('select', function (e, dt, type, indexes) {
+                    if (type === 'row') {
+                        var nodes = table.rows(indexes).nodes().each(function () {
+                            $('td:first-child', this).find('input').prop('checked', true);
+                        });
+                    }
+                });
+
+                table.on('deselect', function (e, dt, type, indexes) {
+                    if (type === 'row') {
+                        table.rows(indexes).nodes().each(function () {
+                            $('td:first-child', this).find('input').prop('checked', false);
+                        });
+                    }
+                });
+            });
+        </script>
+
+        <meta charset=utf-8 />
+        <title>DataTables - JS Bin</title>
+    </head>
+    <body>
+        <div class="container">
+            <table id="example" class="display nowrap" width="100%">
+                <thead>
+                    <tr>
+                        <th>Default</th>
+                        <th>Option</th>
+                        <th>Office</th>
+                        <th>Age</th>
+                        <th>Start date</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><input class="noselect" type="checkbox"></td>
+                        <td>Edinburgh</td>
+                        <td>61</td>
+                        <td>2011/04/25</td>
+                        <td>$3,120</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><input class="noselect" type="checkbox"></td>
+                        <td>Edinburgh</td>
+                        <td>63</td>
+                        <td>2011/07/25</td>
+                        <td>$5,300</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><input class="noselect" type="checkbox"></td>
+                        <td>San Francisco</td>
+                        <td>66</td>
+                        <td>2009/01/12</td>
+                        <td>$4,800</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><input class="noselect" type="checkbox"></td>
+                        <td>Edinburgh</td>
+                        <td>22</td>
+                        <td>2012/03/29</td>
+                        <td>$3,600</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <title>Datatable - Checkbox</title>
+        
+        <link rel="stylesheet" href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css"/>
+        <link rel="stylesheet" href="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.7/css/dataTables.checkboxes.css"/>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.js"></script>
+        <script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.7/js/dataTables.checkboxes.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                var table = $('#example').DataTable({
+                    'ajax': 'data04.txt',
+                    'columnDefs': [
+                        {
+                            'targets': 0,
+                            'visible': false
+                        },
+                        {
+                            'targets': [3, 4, 5],
+                            'data': 0,
+                            'checkboxes': true
+                        }
+                    ],
+                    'order': [[1, 'asc']]
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <table id="example" class="display" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th rowspan="3"></th>
+                    <th rowspan="3">Name</th>
+                    <th rowspan="3">Position</th>
+                    <th colspan="3">Permissions</th>
+                </tr>
+                <tr>
+                    <th>Read</th>
+                    <th>Write</th>
+                    <th>Execute</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Read</th>
+                    <th>Write</th>
+                    <th>Execute</th>
+                </tr>
+            </tfoot>
+        </table>
+    </body>
+</html>

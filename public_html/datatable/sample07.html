@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+        <link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+        <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
+
+        <meta charset=utf-8 />
+        <title>DataTables - JS Bin</title>
+
+        <style>
+            body {
+                font: 90%/1.45em "Helvetica Neue", HelveticaNeue, Verdana, Arial, Helvetica, sans-serif;
+                margin: 0;
+                padding: 0;
+                color: #333;
+                background-color: #fff;
+            }
+        </style>
+
+        <script>
+            $(document).ready(function () {
+
+                let option = {
+                    data: [
+                        {NAME: "TOM", GROUP: "teamA"},
+                        {NAME: "JIM", GROUP: "teamA"},
+                        {NAME: "MIKE", GROUP: "teamB"},
+                        {NAME: "BOB", GROUP: "teamB"}
+                    ],
+                    columns: [
+                        {
+                            data: null,
+                            defaultContent: '<input type="checkbox" name="chkbx">',
+                        },
+                        {data: 'NAME'},
+                        {data: 'GROUP'}
+                    ]
+                };
+
+                let table = $('#example').DataTable(option);
+
+                $('button').on('click', function () {
+                    table
+                            .rows(function (idx, data, node) {
+                                return data.GROUP === 'teamB' ?
+                                        true : false;
+                            })
+                            .nodes()
+                            .to$()      // Convert to a jQuery object
+                            .find('input[type=checkbox]')
+                            .prop('checked', true);
+                });
+
+            });
+
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <button>Check Group B</button>
+            <table id="example" class="display nowrap" width="100%">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Group</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </body>
+</html>
