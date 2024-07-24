@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
+-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="http://www.datatables.net/favicon.ico" rel="shortcut icon" type="image/ico" /><meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
+        <title></title>
+        <link href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+        <link href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+        <link href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css" rel="stylesheet" type="text/css" />
+        <link href="/../../Editor/css/editor.dataTables.min.css" rel="stylesheet" type="text/css" />
+        <link href="/../../Editor/examples/resources/syntax/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="/../../Editor/examples/resources/demo.css" rel="stylesheet" type="text/css" />
+        <link href="/../../Editor/gestion/css/tabla.css" rel="stylesheet" type="text/css" />
+
+        <style class="init" type="text/css">
+
+        </style>
+        <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.4.js"></script>
+        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js">
+        </script>
+        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/select/1.2.1/js/dataTables.select.min.js">
+        </script>
+        <script type="text/javascript" language="javascript" src="/../../Editor/js/dataTables.editor.js">
+        </script>
+        <script type="text/javascript" language="javascript" src="/../../Editor/js/dataTables.editor.min.js">
+        </script>
+        <script type="text/javascript" language="javascript" src="/../../Editor/examples/resources/syntax/shCore.js">
+
+        </script>
+        <script type="text/javascript" language="javascript" src="/../../Editor/examples/resources/editor-demo.js">
+
+        </script>
+        <script type="text/javascript" language="javascript" class="init">
+            var editor;
+            $(document).ready(function () {
+                editor = new $.fn.dataTable.Editor({
+                    ajax: "/../../Editor/gestion/php/Listados.php",
+                    type: 'POST',
+                    table: "#Girasol_Datos_16",
+                    fields: [{label: "Cliente:", name: "Cliente"}, {label: "Variedad:", name: "Variedad"}, {label: "Clearfield:", name: "Clearfield", type: "checkbox", separator: "|", options: [{label: '', value: 1}]}, {label: "Regadio:", name: "Regadio", type: "checkbox", separator: "|", options: [{label: '', value: 1}]}, {label: "Superficie:", name: "Superficie"}, {label: "Bolsas:", name: "Bolsas"}, {label: "Resiembra:", name: "Resiembra", type: "checkbox", separator: "|", options: [{label: '', value: 1}]}, {label: "Bols_Res:", name: "Bols_Res"}, {label: "Promocion:", name: "Promocion", type: "checkbox", separator: "|", options: [{label: '', value: 1}]}, {label: "BolsPromc:", name: "BolsPromc"}, {label: "Sentimiento:", name: "Sentimiento"}, {label: "Kilos:", name: "Kilos"}, {label: "Comentarios:", name: "Comentarios"}, {label: "Contacto:", name: "Contacto"}]
+                });
+                $('#Girasol_Datos_16').DataTable({
+                    dom: "Bfrtip",
+                    ajax: {
+                        url: "/../../Editor/gestion/php/Listados.php",
+                        type: 'POST'
+                    },
+                    columns: [{data: "Cliente"}, {data: "Variedad"}, {data: "Clearfield", render: function (data, type, row) {
+                                if (type === 'display') {
+                                    return   '<input type="checkbox" class="Clearfield">';
+                                }
+                                return data;
+                            },
+                            className: "dt-body-center"}, {data: "Regadio", render: function (data, type, row) {
+                                if (type === 'display') {
+                                    return   '<input type="checkbox" class="Regadio">';
+                                }
+                                return data;
+                            },
+                            className: "dt-body-center"}, {data: "Superficie"}, {data: "Bolsas"}, {data: "Resiembra", render: function (data, type, row) {
+                                if (type === 'display') {
+                                    return   '<input type="checkbox" class="Resiembra">';
+                                }
+                                return data;
+                            },
+                            className: "dt-body-center"}, {data: "Bols_Res"}, {data: "Promocion", render: function (data, type, row) {
+                                if (type === 'display') {
+                                    return   '<input type="checkbox" class="Promocion">';
+                                }
+                                return data;
+                            },
+                            className: "dt-body-center"}, {data: "BolsPromc"}, {data: "Sentimiento"}, {data: "Kilos"}, {data: "Comentarios"}, {data: "Contacto"}],
+                    select: {
+                        style: 'os',
+                        selector: 'td:not(:has(:checkbox))'
+                    },
+                    buttons: [
+                        {extend: "create", editor: editor},
+                        {extend: "edit", editor: editor},
+                        {extend: "remove", editor: editor}
+                    ],
+                    rowCallback: function (row, data) {
+                        // Set the checked state of the checkbox in the table  
+                        var listaCampos = [];
+
+                        listaCampos.push("Clearfield");
+                        listaCampos.push("Regadio");
+                        listaCampos.push("Resiembra");
+                        listaCampos.push("Promocion");
+
+                        for (var i = 0; i <= listaCampos.length; i++) {
+
+                            var aux = "input." + listaCampos[i];
+
+                            $(aux, row).prop('checked', data[listaCampos[i]] == 1);
+                        }
+                    }
+                });
+
+                $('#Girasol_Datos_16').on('change', 'input.Clearfield', function () {
+                    editor
+                            .edit($(this).closest('tr'), false)
+                            .set('Clearfield', $(this).prop('checked') ? 1 : 0)
+                            .submit();
+                });
+                $('#Girasol_Datos_16').on('change', 'input.Regadio', function () {
+                    editor
+                            .edit($(this).closest('tr'), false)
+                            .set('Regadio', $(this).prop('checked') ? 1 : 0)
+                            .submit();
+                });
+                $('#Girasol_Datos_16').on('change', 'input.Resiembra', function () {
+                    editor
+                            .edit($(this).closest('tr'), false)
+                            .set('Resiembra', $(this).prop('checked') ? 1 : 0)
+                            .submit();
+                });
+                $('#Girasol_Datos_16').on('change', 'input.Promocion', function () {
+                    editor
+                            .edit($(this).closest('tr'), false)
+                            .set('Promocion', $(this).prop('checked') ? 1 : 0)
+                            .submit();
+                });
+            });
+        </script>
+        <script>
+            function myFunction() {
+                window.location.href = "/../../node/1";
+            }
+        </script>
+    <body>
+        <div class="container">
+            <div id="Contenedor"><button id="volver" onclick="myFunction()">Mostrar Todas</button></div>
+            <div id="tablasProduccion">
+                <table class="table display table-striped table-bordered" id="Girasol_Datos_16">
+                    <thead>
+                        <tr><th>Cliente</th><th>Variedad</th><th>Clearfield</th><th>Regadio</th><th>Superficie</th><th>Bolsas</th><th>Resiembra</th><th>Bols_Res</th><th>Promocion</th><th>BolsPromc</th><th>Sentimiento</th><th>Kilos</th><th>Comentarios</th><th>Contacto</th>       
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr><th>Cliente</th><th>Variedad</th><th>Clearfield</th><th>Regadio</th><th>Superficie</th><th>Bolsas</th><th>Resiembra</th><th>Bols_Res</th><th>Promocion</th><th>BolsPromc</th><th>Sentimiento</th><th>Kilos</th><th>Comentarios</th><th>Contacto</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div> 
+    </body>
+</html>
